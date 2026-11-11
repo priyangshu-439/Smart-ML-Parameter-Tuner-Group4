@@ -1,0 +1,5 @@
+Dataset,Samples,Features,Classes,Best K,Best Metric,Best Weights,CV Accuracy (%),Baseline Test Acc (%),Optimized Test Acc (%),Optimized Macro-F1 (%)
+Iris,150,4,3,3,euclidean,uniform,96.67,93.33,93.33,93.27
+Wine,178,13,3,7,manhattan,uniform,97.88,97.22,100.0,100.0
+Breast Cancer,569,30,2,3,manhattan,uniform,97.14,95.61,96.49,96.19
+Digits,1797,64,10,4,euclidean,distance,97.91,96.39,96.94,96.9
