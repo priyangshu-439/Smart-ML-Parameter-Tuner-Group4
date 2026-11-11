@@ -1,15 +1,14 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
-
-from sklearn.datasets import load_iris, load_wine, load_breast_cancer, load_digits
-from sklearn.model_selection import train_test_split, GridSearchCV, StratifiedKFold
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
+from sklearn.datasets import load_breast_cancer, load_digits, load_iris, load_wine
 from sklearn.inspection import DecisionBoundaryDisplay
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
+from sklearn.model_selection import GridSearchCV, StratifiedKFold, train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 print("GENERATING MANDATORY VISUAL DEMONSTRATIONS")
 print("==========================================")
@@ -162,13 +161,13 @@ for name, data in datasets.items():
     Xd_train, Xd_test, yd_train, yd_test = train_test_split(
         data.data, data.target, test_size=0.20, random_state=42, stratify=data.target
     )
-    
+
     # Baseline
     b_model = Pipeline([("scaler", StandardScaler()), ("knn", KNeighborsClassifier())])
     b_model.fit(Xd_train, yd_train)
     b_acc = accuracy_score(yd_test, b_model.predict(Xd_test)) * 100
     b_f1 = f1_score(yd_test, b_model.predict(Xd_test), average="macro") * 100
-    
+
     # GridSearch Optimized
     g_search = GridSearchCV(
         Pipeline([("scaler", StandardScaler()), ("knn", KNeighborsClassifier())]),
@@ -178,7 +177,7 @@ for name, data in datasets.items():
     o_pred = g_search.best_estimator_.predict(Xd_test)
     o_acc = accuracy_score(yd_test, o_pred) * 100
     o_f1 = f1_score(yd_test, o_pred, average="macro") * 100
-    
+
     multi_results.append({
         "Dataset": name,
         "Samples": len(data.data),

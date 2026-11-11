@@ -1,13 +1,12 @@
 
-import pandas as pd
 import matplotlib.pyplot as plt
-
+import pandas as pd
 from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 # 1. Load Iris dataset
 iris = load_iris()

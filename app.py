@@ -44,7 +44,7 @@ def get_dataset(name):
         data = load_breast_cancer()
     else:
         data = load_digits()
-    
+
     df = pd.DataFrame(data.data, columns=data.feature_names)
     df["target"] = data.target
     df["class_name"] = [str(data.target_names[i]) for i in data.target]
@@ -191,7 +191,7 @@ with st.expander("🌸 Interactive Live Class Predictor (Test a Sample Input)", 
         else:
             val = f_mean
         user_input.append(val)
-    
+
     pred_class_idx = best_model.predict([user_input])[0]
     pred_probs = best_model.predict_proba([user_input])[0]
     st.success(f"**Predicted Class:** `{target_names[pred_class_idx].upper()}` (Confidence: `{np.max(pred_probs)*100:.1f}%`)")
@@ -213,7 +213,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 with tab1:
     st.subheader("Demonstration 1: Cross-Validation Accuracy vs. K (K = 1 to 15)")
     cv_df = pd.DataFrame(grid_search.cv_results_)
-    
+
     # Filter CV results for currently selected metric & weights
     filtered_cv = cv_df[
         (cv_df["param_knn__metric"] == manual_metric) &
@@ -339,7 +339,7 @@ with tab3:
 # ------------------------------------------
 with tab4:
     st.subheader("Demonstration 4: Before vs. After Optimization Comparison")
-    
+
     # Extract baseline CV score
     base_cv_row = cv_df[
         (cv_df["param_knn__n_neighbors"] == 5) &
