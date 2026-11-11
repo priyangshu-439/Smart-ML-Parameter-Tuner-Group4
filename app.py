@@ -1,23 +1,22 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-
-from sklearn.datasets import load_iris, load_wine, load_breast_cancer, load_digits
-from sklearn.model_selection import train_test_split, GridSearchCV, StratifiedKFold
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.datasets import load_breast_cancer, load_digits, load_iris, load_wine
+from sklearn.inspection import DecisionBoundaryDisplay
 from sklearn.metrics import (
     accuracy_score,
+    classification_report,
+    confusion_matrix,
+    f1_score,
     precision_score,
     recall_score,
-    f1_score,
-    confusion_matrix,
-    classification_report
 )
-from sklearn.inspection import DecisionBoundaryDisplay
+from sklearn.model_selection import GridSearchCV, StratifiedKFold, train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 # ==========================================
 # PAGE CONFIGURATION
@@ -196,7 +195,7 @@ with st.expander("🌸 Interactive Live Class Predictor (Test a Sample Input)", 
     pred_class_idx = best_model.predict([user_input])[0]
     pred_probs = best_model.predict_proba([user_input])[0]
     st.success(f"**Predicted Class:** `{target_names[pred_class_idx].upper()}` (Confidence: `{np.max(pred_probs)*100:.1f}%`)")
-    
+
 # ==========================================
 # 5 MANDATORY DEMONSTRATION TABS
 # ==========================================
